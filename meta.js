@@ -31,7 +31,7 @@ module.exports = {
       return templateVersion
     },
   },
-
+  
   prompts: {
     name: {
       when: 'isNotTest',
@@ -44,14 +44,12 @@ module.exports = {
       type: 'string',
       required: false,
       message: 'Project description',
-      default: 'zhongAn Insurance Vue Project',
+      default: 'A Vue.js project',
     },
     author: {
       when: 'isNotTest',
       type: 'string',
-      required: false,
       message: 'Author',
-      default: 'zhongAn Insurance'
     },
     build: {
       when: 'isNotTest',
@@ -75,6 +73,33 @@ module.exports = {
       when: 'isNotTest',
       type: 'confirm',
       message: 'Install vue-router?',
+    },
+    lint: {
+      when: 'isNotTest',
+      type: 'confirm',
+      message: 'Use ESLint to lint your code?',
+    },
+    lintConfig: {
+      when: 'isNotTest && lint',
+      type: 'list',
+      message: 'Pick an ESLint preset',
+      choices: [
+        {
+          name: 'Standard (https://github.com/standard/standard)',
+          value: 'standard',
+          short: 'Standard',
+        },
+        {
+          name: 'Airbnb (https://github.com/airbnb/javascript)',
+          value: 'airbnb',
+          short: 'Airbnb',
+        },
+        {
+          name: 'none (configure it yourself)',
+          value: 'none',
+          short: 'none',
+        },
+      ],
     },
     unit: {
       when: 'isNotTest',
@@ -133,8 +158,8 @@ module.exports = {
     },
   },
   filters: {
-    // '.eslintrc.js': 'lint',
-    // '.eslintignore': 'lint',
+    '.eslintrc.js': 'lint',
+    '.eslintignore': 'lint',
     'config/test.env.js': 'unit || e2e',
     'build/webpack.test.conf.js': "unit && runner === 'karma'",
     'test/unit/**/*': 'unit',
